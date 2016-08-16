@@ -7,48 +7,129 @@
 import {Jss} from 'jss'
 import preset from 'jss-preset-default'
 
-export const extend = (a, b) => Object.assign({}, a, b)
+/**
+ * @private
+ */
+export const prefixCSS = (base, css) => {
+  function reducer (m, k) {
+    m[[base, k].join('.')] = css[k]
+    return m
+  }
 
-export const flexRow = {display: 'flex', flexDirection: 'row'}
-export const flexCol = {display: 'flex', flexDirection: 'column'}
-export const rowSpaceBetween = extend(flexRow, {justifyContent: 'space-between'})
-export const rowSpaceAround = extend(flexRow, {justifyContent: 'space-around'})
-export const colSpaceAround = extend(flexCol, {justifyContent: 'space-around'})
-export const colSpaceBetween = extend(flexCol, {justifyContent: 'space-between'})
-export const colCenter = extend(flexCol, {justifyContent: 'center'})
-export const rowCenter = extend(flexRow, {justifyContent: 'center'})
-export const colMiddle = extend(colCenter, {alignItems: 'center'})
-export const rowMiddle = extend(rowCenter, {alignItems: 'center'})
-export const rowLeft = extend(flexRow, {justifyContent: 'flex-start'})
-export const rowRight = extend(flexRow, {justifyContent: 'flex-end'})
-export const rowWrap = extend(flexRow, {flexWrap: 'wrap'})
-export const colWrap = extend(flexCol, {flexWrap: 'wrap'})
-export const flexSpread = {flex: '1 0 0'}
-export const alignCenter = {alignItems: 'center'}
-
-export const classNames = {
-  '.flexRow': flexRow,
-  '.flexCol': flexCol,
-  '.rowSpaceBetween': rowSpaceBetween,
-  '.rowSpaceAround': rowSpaceAround,
-  '.colSpaceAround': colSpaceAround,
-  '.colSpaceBetween': colSpaceBetween,
-  '.colCenter': colCenter,
-  '.rowCenter': rowCenter,
-  '.colMiddle': colMiddle,
-  '.rowMiddle': rowMiddle,
-  '.rowLeft': rowLeft,
-  '.rowRight': rowRight,
-  '.rowWrap': rowWrap,
-  '.colWrap': colWrap,
-  '.flexSpread': flexSpread,
-  '.alignCenter': alignCenter
+  return Object.keys(css).reduce(reducer, {})
 }
 
-export const asString = (styles) => {
+/**
+ * sets display to `flex` and flexDirection as `row`
+ * @example
+ * <div className='flb row' />
+ */
+export const row = {display: 'flex', flexDirection: 'row'}
+
+/**
+ * sets display to `flex` and flexDirection as `column`
+ * @example
+ * <div className='flb col' />
+ */
+export const col = {display: 'flex', flexDirection: 'column'}
+
+/**
+ * sets justifyContent to `space-between`
+ * @example
+ * <div className='flb col jc_sb' />
+ */
+export const jc_sb = {justifyContent: 'space-between'}
+
+/**
+ * sets justifyContent to `space-around`
+ * @example
+ * <div className='flb row jc_sa' />
+ */
+export const jc_sa = {justifyContent: 'space-around'}
+
+/**
+ * sets justifyContent to `center`
+ * @example
+ * <div className='flb col jc_c' />
+ */
+export const jc_c = {justifyContent: 'center'}
+
+/**
+ * sets justifyContent to `flex-start`
+ * @example
+ * <div className='flb row jc_fs' />
+ */
+export const jc_fs = {justifyContent: 'flex-start'}
+
+/**
+ * sets justifyContent to `flex-end`
+ * @example
+ * <div className='flb row jc_fe' />
+ */
+export const jc_fe = {justifyContent: 'flex-end'}
+
+/**
+ * sets alignItems to `center`
+ * @example
+ * <div className='flb row jc_c ai_c' />
+ */
+export const ai_c = {alignItems: 'center'}
+
+/**
+ * sets alignItems to `flex-start`
+ * @example
+ * <div className='flb row jc_c ai_fs' />
+ */
+export const ai_fs = {alignItems: 'flex-start'}
+
+/**
+ * sets alignItems to `flex-end`
+ * @example
+ * <div className='flb row jc_c ai_fe' />
+ */
+export const ai_fe = {alignItems: 'flex-end'}
+
+/**
+ * sets flex to `1 0 0`
+ * @example
+ * <div className='flb spread' />
+ */
+export const spread = {flex: '1 0 0'}
+
+/**
+ * sets flexWrap to `wrap`
+ * @example
+ * <div className='flb wrap' />
+ */
+export const wrap = {flexWrap: 'wrap'}
+
+/**
+ * @private
+ */
+export const css = {
+  row,
+  col,
+  jc_sb,
+  jc_sa,
+  jc_c,
+  jc_fs,
+  jc_fe,
+  ai_c,
+  ai_fs,
+  ai_fe,
+  spread,
+  wrap
+}
+
+/**
+ * Creates a stylesheet of all the classes which can directly be inserted into a
+ * HTML <style> tag
+ * By default all the css classes get prefixed with `.flb`.
+ * @function
+ * @returns {string}
+ */
+export const asHtmlStyleString = () => {
   const jss = new Jss(preset)
   const options = {named: false}
-  return jss
-    .createStyleSheet(styles, options)
-    .toString()
+  return jss.createStyleSheet(prefixCSS('.flb', css), options).toString()
 }
