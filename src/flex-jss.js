@@ -129,7 +129,7 @@ export const css = {
  * @returns {string}
  */
 export const asHtmlStyleString = () => {
-  const jss = new Jss(preset)
+  const jss = new Jss(preset())
   const options = {named: false}
   return jss.createStyleSheet(prefixCSS('.flb', css), options).toString()
 }
