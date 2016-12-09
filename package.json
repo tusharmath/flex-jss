@@ -64,6 +64,6 @@
   },
   "dependencies": {
     "jss": "^5.4.0",
-    "jss-preset-default": "^0.4.0"
+    "jss-preset-default": "^1.0.0"
   }
 }
