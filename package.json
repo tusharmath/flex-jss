@@ -63,7 +63,7 @@
     "validate-commit-message": "^3.0.1"
   },
   "dependencies": {
-    "jss": "^5.4.0",
+    "jss": "^7.0.1",
     "jss-preset-default": "^0.4.0"
   }
 }
