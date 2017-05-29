@@ -1,4 +1,6 @@
 # flex-jss
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/tusharmath/flex-jss.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/tusharmath/flex-jss.svg?branch=master)](https://travis-ci.org/tusharmath/flex-jss)
 [![npm](https://img.shields.io/npm/v/flex-jss.svg)](https://www.npmjs.com/package/flex-jss)
 [![Donate Bitcoin](https://img.shields.io/badge/donate-bitcoin-green.svg)](https://www.coinbase.com/tusharmath)
